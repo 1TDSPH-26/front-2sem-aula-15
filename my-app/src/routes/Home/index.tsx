@@ -1,16 +1,15 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState } from "react"
+import { Navigate, useNavigate } from "react-router";
 
 export default function Home() {
-  document.title = "Home";
-
+  document.title = "Home"
+  let chamada: number = 0
   const [clicado, setClicado] = useState<number>(0);
 
-  let chamadas: number = 0;
-
   useEffect(() => {
-    console.log("Um milhão de linhas sendo carregadas:", chamadas);
-    chamadas++;
-  }, [clicado]);
+    console.log("Um milhão de linhas carregadas", clicado)
+  }, [clicado])
+
 
   type TipoUsuarioGit = {
     login: string;
@@ -32,50 +31,56 @@ export default function Home() {
     type: string;
     user_view_type: string;
     site_admin: boolean;
-  };
-
-  const [usuarios, setUsuarios] = useState<TipoUsuarioGit[]>([]);
-
- useEffect(()=>{
-
-  async function loadingData() {
-    try{
-      const response = await fetch(" https://api.github.com/users");
-      
-      if(!response.ok){
-          throw new Error("A listagem dos usuários falhou!");
-        }
-
-        const data:TipoUsuarioGit[] = await response.json();
-
-        setUsuarios(data);
-
-    }catch(error){
-      console.log(error);
-    }
   }
 
-  // loadingData();
+  const navegate = useNavigate();
+  const [usuario, setUsuario] = useState<TipoUsuarioGit[]>([]);
 
- },[]);
+  useEffect(() => {
 
+
+    async function loadingData() {
+      try {
+        const response = await fetch("https://api.github.com/users");
+
+        if (!response.ok) {
+          throw new Error("A listagem dos usuários falhou!");
+
+
+        }
+
+        const data = await response.json();
+        setUsuario(data);
+
+      } catch (error) {
+        console.log(error);
+        navegate("/erro/usuarios-nao-encontrados")
+      }
+
+    }
+
+    loadingData();
+
+  }, [])
 
   return (
     <main>
-      <h2>Home</h2>
+      <h2>Página Inicial</h2>
+
       <div>
-        <p>Valor do STATE : {clicado}</p>
-        <button onClick={() => setClicado(clicado + 1)}>
-          ALTERAR VALOR = {clicado}
-        </button>
+        <p>valor STATE: {clicado}</p>
+        <button onClick={() => setClicado(clicado + 1)}>Alterar valor = {clicado}</button>
       </div>
+
       <div>
         <ul>
-          {usuarios.map( (u,indice)=>(
-            <li key={indice}>{u.id} - {u.login}</li>
-          ))}
+          {usuario.map((objeto, indice) =>
+            <li key={indice}>{objeto.id} - {objeto.login} - <a href={objeto.html_url}> <img src={objeto.avatar_url} alt={objeto.login} width={40} /></a></li>
+
+          )}
+
         </ul>
       </div>
     </main>
-  );
+  )
 }
