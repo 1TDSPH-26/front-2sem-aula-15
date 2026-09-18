@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 
 export default function Home() {
   document.title = "Home";
+<<<<<<< HEAD
 
   const [clicado, setClicado] = useState<number>(0);
 
@@ -76,6 +77,21 @@ export default function Home() {
           ))}
         </ul>
       </div>
+=======
+  const[clicado,Setclicado] = useState<number>(0);
+
+  useEffect( ()=>{
+    console.log("Um Milhão de linhas sendo carregadas:", clicado);
+  },[clicado] );
+  
+  return (
+    <main>
+        <h2>Home</h2>
+        <div>
+          <p>Valor do STATE : {clicado}</p>
+          <button onClick={()=> Setclicado(clicado + 1)}>ALTERAR VALOR = {clicado}</button>
+        </div>
+>>>>>>> f9f31d3e0bd5ef8ca1c8c45de8b1ca939dbbff5b
     </main>
   );
 }
