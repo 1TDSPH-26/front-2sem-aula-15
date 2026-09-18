@@ -1,0 +1,53 @@
+{
+  "produtos": [
+    {
+      "id": "1",
+      "nome": "Notebook",
+      "preco": 3500,
+      "estoque": 10
+    },
+    {
+      "id": "2",
+      "nome": "Mouse",
+      "preco": 120,
+      "estoque": 25
+    },
+    {
+      "id": "3",
+      "nome": "Teclado",
+      "preco": 210,
+      "estoque": 8
+    },
+    {
+      "id": "oUnWD4vyrNE"
+    },
+    {
+      "id": "o2bhzO5m1r4"
+    },
+    {
+      "id": "wl1q8lsIdAA"
+    },
+    {
+      "id": "RO5IbVbCHOw"
+    },
+    {
+      "nome": "Mouse",
+      "preco": 120,
+      "estoque": 25,
+      "id": "qnhY7S_eAig"
+    },
+    {
+      "nome": "Câmera",
+      "preco": 555,
+      "estoque": 11,
+      "id": "0pEzSAFqsv8"
+    },
+    {
+      "nome": "Câmera",
+      "preco": 2230,
+      "estoque": 10,
+      "id": "0LSZc2IJ6LI"
+    }
+  ],
+  "$schema": "./node_modules/json-server/schema.json"
+}
