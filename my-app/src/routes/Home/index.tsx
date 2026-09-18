@@ -73,7 +73,7 @@ export default function Home() {
         <ul>
           {usuarios.map( (u,indice)=>(
             <li key={indice}>{u.id} - {u.login} - 
-            < a href = {u.html_url} target = "_blank"/>< img src = {u.avatar_url} alt = {u.login} width={40}/></li>
+            < a href = {u.html_url} target = "_blank"></a> img src = {u.avatar_url} alt = {u.login} width={40}/></li>
           ))}
         </ul>
       </div>
