@@ -1,7 +1,3 @@
-<<<<<<< HEAD
-
-=======
->>>>>>> feature/exemplo-pf0670
 import { useEffect, useState } from "react";
 import { useParams } from "react-router";
 
