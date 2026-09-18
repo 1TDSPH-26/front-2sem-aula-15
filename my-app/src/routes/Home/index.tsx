@@ -36,29 +36,28 @@ export default function Home() {
 
   const [usuarios, setUsuarios] = useState<TipoUsuarioGit[]>([]);
 
- useEffect(()=>{
+  useEffect(() => {
 
-  async function loadingData() {
-    try{
-      const response = await fetch(" https://api.github.com/users");
-      
-      if(!response.ok){
+    async function loadingData() {
+      try {
+        const response = await fetch(" https://api.github.com/users");
+
+        if (!response.ok) {
           throw new Error("A listagem dos usuários falhou!");
         }
 
-        const data:TipoUsuarioGit[] = await response.json();
+        const data: TipoUsuarioGit[] = await response.json();
 
         setUsuarios(data);
 
-    }catch(error){
-      console.log(error);
+      } catch (error) {
+        console.log(error);
+      }
     }
-  }
 
-  // loadingData();
+    // loadingusuarios();
 
- },[]);
-
+  }, []);
 
   return (
     <main>
@@ -71,8 +70,10 @@ export default function Home() {
       </div>
       <div>
         <ul>
-          {usuarios.map( (u,indice)=>(
-            <li key={indice}>{u.id} - {u.login}</li>
+          {usuarios.map((u, indice) => (
+            <li key={indice}>{u.id} - {u.login} -
+            <a href={u.html_url} target="_blank"><img src={u.avatar_url} alt={u.login} width={40} /></a>
+            </li>
           ))}
         </ul>
       </div>
