@@ -1,0 +1,35 @@
+{
+  "produtos": [
+    {
+      "id": "1",
+      "nome": "Notebook",
+      "preco": 3500,
+      "estoque": 10
+    },
+    {
+      "id": "2",
+      "nome": "Mouse",
+      "preco": 120,
+      "estoque": 25
+    },
+    {
+      "id": "3",
+      "nome": "Teclado",
+      "preco": 210,
+      "estoque": 8
+    },
+    {
+      "id": "4",
+      "nome": "Cadeira gamer",
+      "preco": 67,
+      "estoque": 1
+    },
+    {
+      "nome": "Camera",
+      "preco": 1414,
+      "estoque": 14,
+      "id": "aOTirfnb9uA"
+    }
+  ],
+  "$schema": "./node_modules/json-server/schema.json"
+}
