@@ -56,7 +56,8 @@ export default function Home() {
 
         async function loadingusuarios() {
             try {
-                const response = await fetch("https://api.github.com/users");
+               
+                const response = await fetch(`https://api.github.com/users`);
 
                 if (!response.ok) {
                     throw new Error("Erro ao buscar usuários")
@@ -72,7 +73,11 @@ export default function Home() {
 
         loadingusuarios()
 
+
+
     }, [])
+
+    
 
     return (
         <div>
@@ -86,13 +91,16 @@ export default function Home() {
             <div>
                 <ul>
                     {usuarios.map((u) => (
-                        <li>
+                        <li key={u.id}>
                             <p>{u.login}</p>
-                            <img src={u.avatar_url} alt={u.login} />
+                            <a href={u.html_url}>
+                            <img src={u.avatar_url} alt={u.login} width={40} />
+                            </a>
                         </li>
                     ))}
                 </ul>
             </div>
+        
         </div>
 
     )
