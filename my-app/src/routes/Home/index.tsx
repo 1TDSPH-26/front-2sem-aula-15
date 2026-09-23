@@ -1,85 +1,66 @@
 import { useEffect, useState } from "react";
+import type { TipoProduto } from "../types/types";
 
-export default function Home() {
-  document.title = "Home";
+export default function Produtos() {
+  document.title = "Produtos";
 
-  const [clicado, setClicado] = useState<number>(0);
+  const[produtos,setProdutos] = useState<TipoProduto[]>([]);
 
-  let chamadas: number = 0;
+  useEffect( ()=>{
 
-  useEffect(() => {
-    console.log("Um milhão de linhas sendo carregadas:", chamadas);
-    chamadas++;
-  }, [clicado]);
+    const carregaProdutos = async ()=>{
 
-  type TipoUsuarioGit = {
-    login: string;
-    id: number;
-    node_id: string;
-    avatar_url: string;
-    gravatar_id: string;
-    url: string;
-    html_url: string;
-    followers_url: string;
-    following_url: string;
-    gists_url: string;
-    starred_url: string;
-    subscriptions_url: string;
-    organizations_url: string;
-    repos_url: string;
-    events_url: string;
-    received_events_url: string;
-    type: string;
-    user_view_type: string;
-    site_admin: boolean;
-  };
-
-  const [usuarios, setUsuarios] = useState<TipoUsuarioGit[]>([]);
-
- useEffect(()=>{
-
-  async function loadingData() {
-    try{
-      const response = await fetch("https://api.github.com/users");
-      
-      if(!response.ok){
-          throw new Error("A listagem dos usuários falhou!");
+      try {
+        const resposta = await fetch("http://localhost:3001/produtos");
+        
+        if(!resposta.ok){
+          throw new Error("Erro na listagem dos produtos!");
         }
 
-        const data:TipoUsuarioGit[] = await response.json();
+        const data:TipoProduto[] = await resposta.json();
+        setProdutos(data);
 
-        setUsuarios(data);
-
-    }catch(error){
-      console.log(error);
+      } catch (error) {
+        console.error(error);
+      }
     }
-  }
 
-  // loadingData();
+    carregaProdutos();
 
- },[]);
-
+  },[]);
 
   return (
     <main>
-      <h2>Home</h2>
-      <div>
-        <p>Valor do STATE : {clicado}</p>
-        <button onClick={() => setClicado(clicado + 1)}>
-          ALTERAR VALOR = {clicado}
-        </button>
-      </div>
-      <div>
-        <ul>
-          {usuarios.map( (u,indice)=>(
-            <li key={indice}>{u.id} - {u.login} - 
-            
-              <a href={u.html_url} target="_blank"><img src={u.avatar_url} alt={u.login} width={40} /></a>
-            
-            </li>
-          ))}
-        </ul>
-      </div>
+        <h2>Produtos</h2>
+        <div>
+          <table border={1} style={{borderCollapse:"collapse"}}>
+            <thead>
+              <tr>
+                <th>ID</th>
+                <th>NOME</th>
+                <th>PREÇO</th>
+                <th>ESTOQUE</th>
+                <th>AÇÕES</th>
+              </tr>
+            </thead>
+            <tbody>
+              {produtos.map( (produto)=>(
+                <tr key={produto.id}>
+                  <td>{produto.id}</td>
+                  <td>{produto.nome}</td>
+                  <td>{produto.preco}</td>
+                  <td>{produto.estoque}</td>
+                  <td>EDITAR/<button>EXCLUIR</button></td>
+                </tr>
+              ))}
+            </tbody>
+            <tfoot>
+              <tr>
+                <td colSpan={5}>Quantidade de produtos: {produtos.length}</td>
+              </tr>
+            </tfoot>
+          </table>
+        </div>
     </main>
-  );
+  )
 }
